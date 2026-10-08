@@ -1,0 +1,2923 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🍇 Vinha dos Livros</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #faf7f2;
+            color: #332338;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           CABEÇALHO
+        ========================================================= */
+
+        .cabecalho {
+            width: 100%;
+            min-height: 82px;
+            padding: 15px 6%;
+            background: #fffdf9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 20px rgba(65, 34, 63, 0.08);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo > span {
+            font-size: 34px;
+        }
+
+        .logo strong,
+        .logo small {
+            display: block;
+        }
+
+        .logo strong {
+            font-family: 'DM Serif Display', serif;
+            color: #652c5e;
+            font-size: 27px;
+            line-height: 22px;
+        }
+
+        .logo small {
+            color: #9b6d91;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .menu {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .menu a {
+            color: #51384f;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            color: #8b397d;
+        }
+
+        .acoes {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pesquisa {
+            width: 230px;
+            height: 42px;
+            border: 1px solid #e5d9e1;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 14px;
+            background: white;
+        }
+
+        .pesquisa input {
+            width: 100%;
+            border: none;
+            outline: none;
+            color: #44303f;
+            background: transparent;
+        }
+
+        .carrinho {
+            position: relative;
+            font-size: 23px;
+            color: #652c5e;
+            padding: 7px;
+        }
+
+        .carrinho span {
+            position: absolute;
+            top: -4px;
+            right: -5px;
+            background: #c94d72;
+            color: white;
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* =========================================================
+           BANNER
+        ========================================================= */
+
+        .banner {
+            min-height: 570px;
+            background: linear-gradient(120deg, #4d2149, #7d356d);
+            color: white;
+            padding: 70px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner-texto {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mini-titulo {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #e6bddc;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .banner h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(48px, 7vw, 82px);
+            font-weight: 400;
+            line-height: 0.98;
+            margin-bottom: 25px;
+        }
+
+        .banner h1 span {
+            color: #e8a9c8;
+        }
+
+        .descricao {
+            max-width: 520px;
+            color: #eaddea;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 13px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .botao {
+            display: inline-block;
+            padding: 14px 23px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .botao.principal {
+            background: #fff;
+            color: #632b5b;
+        }
+
+        .botao.principal:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .botao.secundario {
+            border: 1px solid rgba(255,255,255,0.5);
+            color: white;
+        }
+
+        .botao.secundario:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .banner-livro {
+            width: 390px;
+            height: 430px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circulo {
+            width: 360px;
+            height: 360px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .livro-gigante {
+            width: 230px;
+            height: 330px;
+            background: linear-gradient(145deg, #a94c85, #401d45);
+            border-radius: 5px 12px 12px 5px;
+            box-shadow: 25px 25px 50px rgba(0,0,0,0.35);
+            border-left: 9px solid #35163b;
+            text-align: center;
+            padding: 35px 15px;
+            transform: rotate(5deg);
+            z-index: 2;
+        }
+
+        .livro-gigante span {
+            font-size: 48px;
+        }
+
+        .livro-gigante h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 28px;
+            margin-top: 30px;
+        }
+
+        .livro-gigante p {
+            font-size: 11px;
+            letter-spacing: 4px;
+        }
+
+        .livro-gigante small {
+            display: block;
+            margin-top: 45px;
+            color: #e7cce1;
+        }
+
+        .uvas {
+            position: absolute;
+            opacity: 0.25;
+            font-size: 55px;
+        }
+
+        .uva1 {
+            left: 3%;
+            top: 20%;
+        }
+
+        .uva2 {
+            right: 45%;
+            bottom: 5%;
+        }
+
+        .uva3 {
+            right: 5%;
+            top: 10%;
+        }
+
+        /* =========================================================
+           SEÇÕES
+        ========================================================= */
+
+        .categorias,
+        .livros,
+        .mais-vendidos,
+        .sobre,
+        .carrinho-area {
+            padding: 80px 7%;
+        }
+
+        .titulo-secao {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .titulo-secao > p {
+            color: #9b4d89;
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .titulo-secao h2 {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 400;
+            font-size: 42px;
+            color: #4b2947;
+            margin: 8px 0;
+        }
+
+        .titulo-secao span {
+            color: #8c7a88;
+            font-size: 14px;
+        }
+
+        /* =========================================================
+           CATEGORIAS
+        ========================================================= */
+
+        .categorias {
+            background: #fffdf9;
+        }
+
+        .categorias-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+        }
+
+        .categoria {
+            background: #faf6f1;
+            border: 1px solid #eee4eb;
+            padding: 25px 10px;
+            text-align: center;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .categoria:hover {
+            transform: translateY(-5px);
+            background: #f4e8f1;
+        }
+
+        .categoria .icone {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .categoria h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 19px;
+            color: #532c4e;
+        }
+
+        .categoria p {
+            color: #988692;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* =========================================================
+           CATÁLOGO
+        ========================================================= */
+
+        .livros {
+            background: #faf7f2;
+        }
+
+        .livros-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .card-livro {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(68, 35, 64, 0.08);
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .card-livro:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(68, 35, 64, 0.14);
+        }
+
+        .etiqueta {
+            position: absolute;
+            top: 13px;
+            left: 13px;
+            z-index: 5;
+            background: #713667;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .etiqueta.novo {
+            background: #4b9273;
+        }
+
+        .etiqueta.oferta {
+            background: #c34f6f;
+        }
+
+        .favorito {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            width: 37px;
+            height: 37px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            color: #6c4965;
+            font-size: 24px;
+            line-height: 37px;
+            z-index: 10;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+            transition: 0.2s;
+        }
+
+        .favorito:hover {
+            transform: scale(1.1);
+        }
+
+        .favorito.ativo {
+            color: #d13d68;
+        }
+
+        /* CAPAS */
+
+        .capa {
+            height: 290px;
+            color: white;
+            padding: 25px 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .capa::before {
+            content: "";
+            position: absolute;
+            width: 170px;
+            height: 170px;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 50%;
+        }
+
+        .capa span {
+            font-size: 38px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .capa h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 27px;
+            line-height: 1.05;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .capa small {
+            font-size: 8px;
+            letter-spacing: 3px;
+            margin-top: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .capa1 { background: linear-gradient(145deg, #9b477b, #421d43); }
+        .capa2 { background: linear-gradient(145deg, #34547c, #17223e); }
+        .capa3 { background: linear-gradient(145deg, #475a50, #1e2e2a); }
+        .capa4 { background: linear-gradient(145deg, #b35370, #54213c); }
+
+        .informacoes {
+            padding: 20px;
+        }
+
+        .genero {
+            color: #a15891;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .informacoes h3 {
+            font-family: 'DM Serif Display', serif;
+            color: #4c2b47;
+            font-size: 21px;
+            margin-top: 5px;
+        }
+
+        .informacoes > p {
+            color: #958692;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .avaliacao {
+            font-size: 12px;
+            margin: 12px 0;
+        }
+
+        .avaliacao span {
+            color: #a3939f;
+            margin-left: 4px;
+        }
+
+        .preco {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .preco strong {
+            color: #5c2855;
+            font-size: 19px;
+        }
+
+        .preco del {
+            color: #a99ba5;
+            font-size: 12px;
+        }
+
+        .comprar {
+            width: 100%;
+            border: none;
+            background: #6d3164;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .comprar:hover {
+            background: #4d2149;
+        }
+
+        .ver-todos {
+            display: block;
+            width: fit-content;
+            margin: 40px auto 0;
+            background: #6d3164;
+            color: white;
+        }
+
+        /* =========================================================
+           DESCRIÇÃO
+        ========================================================= */
+
+        .descricao-livro {
+            font-size: 11px;
+            line-height: 1.6;
+            color: #82747e;
+            margin: 9px 0;
+        }
+
+        /* =========================================================
+           OFERTA
+        ========================================================= */
+
+        .oferta {
+            background: linear-gradient(110deg, #662b5d, #922e62);
+            color: white;
+            padding: 65px 9%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .oferta > div:nth-child(2) {
+            position: relative;
+            z-index: 2;
+        }
+
+        .oferta p {
+            color: #eccce2;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .oferta h2 {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 400;
+            font-size: 43px;
+            max-width: 600px;
+        }
+
+        .oferta h2 span {
+            color: #f0b5d2;
+        }
+
+        .oferta h2 + p {
+            letter-spacing: 0;
+            margin-top: 12px;
+        }
+
+        .branco {
+            background: white;
+            color: #672d5e;
+            margin-top: 20px;
+        }
+
+        .porcentagem {
+            width: 180px;
+            height: 180px;
+            border: 2px dashed rgba(255,255,255,0.4);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .porcentagem strong {
+            font-family: 'DM Serif Display', serif;
+            font-size: 55px;
+        }
+
+        .porcentagem span {
+            letter-spacing: 5px;
+        }
+
+        .uvas-oferta {
+            position: absolute;
+            left: 5%;
+            bottom: -20px;
+            font-size: 70px;
+            opacity: 0.18;
+        }
+
+        /* =========================================================
+           MAIS VENDIDOS
+        ========================================================= */
+
+        .mais-vendidos {
+            background: #fffdf9;
+        }
+
+        .ranking {
+            max-width: 850px;
+            margin: auto;
+            display: grid;
+            gap: 12px;
+        }
+
+        .ranking-livro {
+            display: grid;
+            grid-template-columns: 50px 65px 1fr auto;
+            align-items: center;
+            gap: 15px;
+            background: #faf7f2;
+            padding: 12px 20px;
+            border-radius: 12px;
+        }
+
+        .numero {
+            font-family: 'DM Serif Display', serif;
+            color: #b99bac;
+            font-size: 22px;
+        }
+
+        .mini-capa {
+            width: 55px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .roxo {
+            background: linear-gradient(145deg, #70426e, #311c38);
+        }
+
+        .vinho {
+            background: linear-gradient(145deg, #a74b62, #4b1e35);
+        }
+
+        .lilas {
+            background: linear-gradient(145deg, #9878ae, #4d385e);
+        }
+
+        .ranking-livro h3 {
+            color: #54344f;
+            font-family: 'DM Serif Display', serif;
+        }
+
+        .ranking-livro p {
+            color: #988993;
+            font-size: 11px;
+        }
+
+        .ranking-livro > strong {
+            color: #66315f;
+        }
+
+        /* =========================================================
+           SOBRE
+        ========================================================= */
+
+        .sobre {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .sobre-imagem {
+            min-height: 380px;
+            background: #ead9e7;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vinha {
+            position: absolute;
+            left: 30px;
+            top: 20px;
+            font-size: 70px;
+            line-height: 1.2;
+            width: 150px;
+            transform: rotate(-15deg);
+        }
+
+        .livro-aberto {
+            font-size: 120px;
+            filter: drop-shadow(10px 15px 15px rgba(0,0,0,0.2));
+        }
+
+        .sobre-texto h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 48px;
+            font-weight: 400;
+            line-height: 1.05;
+            color: #4c2a48;
+            margin-bottom: 25px;
+        }
+
+        .sobre-texto h2 span {
+            color: #8c3c78;
+        }
+
+        .sobre-texto > p:not(.mini-titulo) {
+            color: #7e707a;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* =========================================================
+           NEWSLETTER
+        ========================================================= */
+
+        .newsletter {
+            padding: 50px 8%;
+            background: #f0e4ee;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .newsletter-icone {
+            font-size: 40px;
+        }
+
+        .newsletter p {
+            color: #97518b;
+            letter-spacing: 2px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .newsletter h2 {
+            font-family: 'DM Serif Display', serif;
+            color: #4d2948;
+            font-size: 27px;
+        }
+
+        .newsletter span {
+            color: #85747f;
+            font-size: 12px;
+        }
+
+        .newsletter form {
+            margin-left: auto;
+            display: flex;
+            background: white;
+            border-radius: 30px;
+            padding: 5px;
+            width: 390px;
+        }
+
+        .newsletter input {
+            border: none;
+            outline: none;
+            padding: 10px 15px;
+            width: 100%;
+        }
+
+        .newsletter button {
+            border: none;
+            background: #6c3163;
+            color: white;
+            border-radius: 25px;
+            padding: 10px 18px;
+        }
+
+        /* =========================================================
+           CARRINHO
+        ========================================================= */
+
+        .carrinho-area {
+            background: #faf7f2;
+        }
+
+        .carrinho-box {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 5px 25px rgba(68,35,64,0.08);
+        }
+
+        .item-carrinho {
+            display: grid;
+            grid-template-columns: 65px 1fr auto;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee5eb;
+        }
+
+        .item-carrinho h3 {
+            font-family: 'DM Serif Display', serif;
+            color: #54334f;
+        }
+
+        .item-carrinho p {
+            color: #92848e;
+            font-size: 11px;
+        }
+
+        .quantidade {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .quantidade button {
+            width: 25px;
+            height: 25px;
+            border: 1px solid #dfd1dc;
+            background: #faf7f2;
+            border-radius: 5px;
+        }
+
+        .remover {
+            border: none !important;
+            background: transparent !important;
+            color: #c64d70;
+            margin-left: 5px;
+        }
+
+        .item-carrinho > strong {
+            color: #652d5d;
+        }
+
+        .subtotal {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            color: #73616e;
+            font-size: 14px;
+        }
+
+        .desconto {
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            color: #37855e;
+            font-weight: 600;
+        }
+
+        .total {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #e9dfe7;
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+        }
+
+        .total strong {
+            color: #602957;
+        }
+
+        .aviso-desconto {
+            margin-top: 12px;
+            padding: 12px;
+            background: #f5e9f2;
+            color: #74416c;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .finalizar {
+            width: 100%;
+            border: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #6c3062;
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .finalizar:hover {
+            background: #4b2147;
+        }
+
+        .carrinho-vazio {
+            text-align: center;
+            padding: 35px;
+            color: #988994;
+        }
+
+        /* =========================================================
+           MENSAGEM
+        ========================================================= */
+
+        .mensagem {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #4d2149;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 10px;
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 0.3s;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            font-size: 13px;
+        }
+
+        .mensagem.mostrar {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* =========================================================
+           RODAPÉ
+        ========================================================= */
+
+        footer {
+            background: #351a33;
+            color: white;
+        }
+
+        .footer-conteudo {
+            padding: 60px 7%;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-logo .logo strong {
+            color: white;
+        }
+
+        .footer-logo .logo small {
+            color: #c6a4be;
+        }
+
+        .footer-logo > p {
+            margin-top: 15px;
+            color: #c3b1bf;
+            font-size: 12px;
+        }
+
+        .footer-coluna {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-coluna h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .footer-coluna a {
+            color: #c9bac6;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+
+        .footer-coluna a:hover {
+            color: white;
+        }
+
+        .redes {
+            display: flex;
+            gap: 10px;
+        }
+
+        .redes a {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #63475f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #51334d;
+            padding: 20px;
+            color: #a995a5;
+            font-size: 11px;
+        }
+
+        /* =========================================================
+           RESULTADO DA PESQUISA
+        ========================================================= */
+
+        .resultado-pesquisa {
+            display: none;
+            text-align: center;
+            padding: 25px;
+            color: #76566f;
+        }
+
+        .resultado-pesquisa.ativo {
+            display: block;
+        }
+
+        /* =========================================================
+           RESPONSIVO
+        ========================================================= */
+
+        @media (max-width: 1100px) {
+            .menu {
+                display: none;
+            }
+
+            .livros-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .categorias-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+            .cabecalho {
+                padding: 12px 4%;
+            }
+
+            .pesquisa {
+                width: 160px;
+            }
+
+            .banner {
+                padding: 55px 7%;
+            }
+
+            .banner-livro {
+                display: none;
+            }
+
+            .livros-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .categorias-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sobre {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .oferta {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .newsletter {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .newsletter form {
+                margin: 0;
+                width: 100%;
+            }
+
+            .footer-conteudo {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .logo strong {
+                font-size: 22px;
+            }
+
+            .logo small {
+                font-size: 8px;
+            }
+
+            .pesquisa {
+                width: 42px;
+                padding: 0 12px;
+            }
+
+            .pesquisa input {
+                display: none;
+            }
+
+            .livros-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .categorias-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .ranking-livro {
+                grid-template-columns: 35px 50px 1fr;
+            }
+
+            .ranking-livro > strong {
+                display: none;
+            }
+
+            .footer-conteudo {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     CABEÇALHO
+========================================================= -->
+
+<header class="cabecalho">
+
+    <a href="#inicio" class="logo">
+        <span>🍇</span>
+        <div>
+            <strong>Vinha</strong>
+            <small>dos Livros</small>
+        </div>
+    </a>
+
+    <nav class="menu">
+        <a href="#inicio">Início</a>
+        <a href="#livros">Livros</a>
+        <a href="#categorias">Categorias</a>
+        <a href="#ofertas">Ofertas</a>
+        <a href="#sobre">Sobre</a>
+    </nav>
+
+    <div class="acoes">
+
+        <label class="pesquisa">
+            <span>🔎</span>
+            <input
+                type="text"
+                id="campoPesquisa"
+                placeholder="Pesquisar livro..."
+            >
+        </label>
+
+        <a href="#carrinho" class="carrinho">
+            🛒
+            <span id="contadorCarrinho">0</span>
+        </a>
+
+    </div>
+</header>
+
+
+<main>
+
+<!-- =========================================================
+     BANNER
+========================================================= -->
+
+<section class="banner" id="inicio">
+
+    <div class="uvas uva1">🍇</div>
+    <div class="uvas uva2">🍇</div>
+    <div class="uvas uva3">🍇</div>
+
+    <div class="banner-texto">
+
+        <p class="mini-titulo">🍇 BEM-VINDO À VINHA</p>
+
+        <h1>
+            Histórias que
+            <span>criam raízes.</span>
+        </h1>
+
+        <p class="descricao">
+            Descubra livros incríveis, encontre novos mundos
+            e deixe sua imaginação florescer.
+        </p>
+
+        <div class="botoes">
+            <a href="#livros" class="botao principal">
+                Explorar livros →
+            </a>
+
+            <a href="#categorias" class="botao secundario">
+                Ver categorias
+            </a>
+        </div>
+
+    </div>
+
+    <div class="banner-livro">
+
+        <div class="circulo"></div>
+
+        <div class="livro-gigante">
+            <span>🍇</span>
+            <h3>A VINHA</h3>
+            <p>DOS LIVROS</p>
+            <small>Uma história começa aqui...</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CATEGORIAS
+========================================================= -->
+
+<section class="categorias" id="categorias">
+
+    <div class="titulo-secao">
+        <p>EXPLORE</p>
+        <h2>Encontre seu gênero favorito</h2>
+        <span>Cada história tem seu próprio sabor.</span>
+    </div>
+
+    <div class="categorias-grid">
+
+        <a href="#livros" class="categoria">
+            <div class="icone">💕</div>
+            <h3>Romance</h3>
+            <p>Livros de romance</p>
+        </a>
+
+        <a href="#livros" class="categoria">
+            <div class="icone">🔮</div>
+            <h3>Fantasia</h3>
+            <p>Livros de fantasia</p>
+        </a>
+
+        <a href="#livros" class="categoria">
+            <div class="icone">👻</div>
+            <h3>Terror</h3>
+            <p>Livros de terror</p>
+        </a>
+
+        <a href="#livros" class="categoria">
+            <div class="icone">🕵️</div>
+            <h3>Mistério</h3>
+            <p>Livros de mistério</p>
+        </a>
+
+        <a href="#livros" class="categoria">
+            <div class="icone">🚀</div>
+            <h3>Ficção</h3>
+            <p>Livros de ficção</p>
+        </a>
+
+        <a href="#livros" class="categoria">
+            <div class="icone">📜</div>
+            <h3>Clássicos</h3>
+            <p>Livros clássicos</p>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CATÁLOGO
+========================================================= -->
+
+<section class="livros" id="livros">
+
+    <div class="titulo-secao">
+
+        <p>SELEÇÃO ESPECIAL</p>
+
+        <h2>Livros em destaque</h2>
+
+        <span>
+            Histórias escolhidas especialmente para você.
+        </span>
+
+    </div>
+
+    <div id="resultadoPesquisa" class="resultado-pesquisa"></div>
+
+    <div class="livros-grid" id="catalogo"></div>
+
+</section>
+
+
+<!-- =========================================================
+     OFERTA
+========================================================= -->
+
+<section class="oferta" id="ofertas">
+
+    <div class="uvas-oferta">
+        🍇 🍇 🍇
+    </div>
+
+    <div>
+
+        <p>🍇 OFERTA ESPECIAL</p>
+
+        <h2>
+            Histórias incríveis
+            <span>com até 40% OFF</span>
+        </h2>
+
+        <p>
+            Aproveite nossas ofertas especiais
+            por tempo limitado.
+        </p>
+
+        <a href="#livros" class="botao branco">
+            Aproveitar ofertas →
+        </a>
+
+    </div>
+
+    <div class="porcentagem">
+        <strong>40%</strong>
+        <span>OFF</span>
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MAIS VENDIDOS
+========================================================= -->
+
+<section class="mais-vendidos">
+
+    <div class="titulo-secao">
+        <p>OS FAVORITOS</p>
+        <h2>Mais vendidos</h2>
+    </div>
+
+    <div class="ranking">
+
+        <div class="ranking-livro">
+
+            <span class="numero">01</span>
+
+            <div class="mini-capa roxo">
+                📖
+            </div>
+
+            <div>
+                <h3>O Jardim das Sombras</h3>
+                <p>Helena Costa</p>
+                <span>⭐⭐⭐⭐⭐</span>
+            </div>
+
+            <strong>R$ 42,90</strong>
+
+        </div>
+
+
+        <div class="ranking-livro">
+
+            <span class="numero">02</span>
+
+            <div class="mini-capa vinho">
+                📚
+            </div>
+
+            <div>
+                <h3>Depois do Inverno</h3>
+                <p>Gabriel Lima</p>
+                <span>⭐⭐⭐⭐⭐</span>
+            </div>
+
+            <strong>R$ 36,90</strong>
+
+        </div>
+
+
+        <div class="ranking-livro">
+
+            <span class="numero">03</span>
+
+            <div class="mini-capa lilas">
+                ✨
+            </div>
+
+            <div>
+                <h3>Estrelas Perdidas</h3>
+                <p>Laura Mendes</p>
+                <span>⭐⭐⭐⭐☆</span>
+            </div>
+
+            <strong>R$ 29,90</strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SOBRE
+========================================================= -->
+
+<section class="sobre" id="sobre">
+
+    <div class="sobre-imagem">
+
+        <div class="vinha">
+            🍇
+            🍇
+            🍇
+        </div>
+
+        <div class="livro-aberto">
+            📖
+        </div>
+
+    </div>
+
+    <div class="sobre-texto">
+
+        <p class="mini-titulo">
+            🍇 NOSSA HISTÓRIA
+        </p>
+
+        <h2>
+            Mais que uma livraria,
+            uma <span>experiência.</span>
+        </h2>
+
+        <p>
+            A Vinha dos Livros nasceu da paixão por histórias
+            e da vontade de criar um lugar onde cada pessoa
+            pudesse encontrar uma leitura especial.
+        </p>
+
+        <p>
+            Assim como uma vinha precisa de tempo para crescer,
+            grandes histórias também precisam ser apreciadas
+            com calma.
+        </p>
+
+        <a href="#livros" class="botao principal">
+            Conheça nossa história →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     NEWSLETTER
+========================================================= -->
+
+<section class="newsletter">
+
+    <div class="newsletter-icone">
+        ✉️
+    </div>
+
+    <div>
+
+        <p>FIQUE POR DENTRO</p>
+
+        <h2>Receba novidades da Vinha</h2>
+
+        <span>
+            Promoções, lançamentos e recomendações direto no seu e-mail.
+        </span>
+
+    </div>
+
+    <form id="newsletterForm">
+
+        <input
+            type="email"
+            placeholder="Digite seu melhor e-mail"
+            required
+        >
+
+        <button type="submit">
+            Inscrever →
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- =========================================================
+     CARRINHO
+========================================================= -->
+
+<section class="carrinho-area" id="carrinho">
+
+    <div class="titulo-secao">
+
+        <p>SUA SACOLA</p>
+
+        <h2>🛒 Carrinho</h2>
+
+    </div>
+
+    <div class="carrinho-box" id="carrinhoBox"></div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     RODAPÉ
+========================================================= -->
+
+<footer>
+
+    <div class="footer-conteudo">
+
+        <div class="footer-logo">
+
+            <div class="logo">
+
+                <span>🍇</span>
+
+                <div>
+                    <strong>Vinha</strong>
+                    <small>dos Livros</small>
+                </div>
+
+            </div>
+
+            <p>
+                Onde histórias criam raízes. 🍇
+            </p>
+
+        </div>
+
+
+        <div class="footer-coluna">
+
+            <h3>Explorar</h3>
+
+            <a href="#inicio">Início</a>
+            <a href="#livros">Livros</a>
+            <a href="#categorias">Categorias</a>
+            <a href="#ofertas">Ofertas</a>
+
+        </div>
+
+
+        <div class="footer-coluna">
+
+            <h3>Atendimento</h3>
+
+            <a href="#">Fale conosco</a>
+            <a href="#">Entrega</a>
+            <a href="#">Trocas</a>
+            <a href="#">Dúvidas</a>
+
+        </div>
+
+
+        <div class="footer-coluna">
+
+            <h3>Siga a gente</h3>
+
+            <div class="redes">
+                <a href="#">📸</a>
+                <a href="#">📘</a>
+                <a href="#">🎵</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+
+        <p>
+            © 2026 Vinha dos Livros. Feito com 💜 e 🍇.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<div id="mensagem" class="mensagem"></div>
+
+
+<script>
+
+/* =========================================================
+   BANCO DE LIVROS
+
+   34 livros:
+   4 originais + 30 novos
+========================================================= */
+
+const livros = [
+
+    {
+        id: 1,
+        titulo: "A Vinha Secreta",
+        autor: "Marina Oliveira",
+        genero: "Romance",
+        preco: 39.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 245,
+        emoji: "🍇",
+        capa: "capa1",
+        etiqueta: "DESTAQUE",
+        descricao: "Marina descobre uma antiga vinha escondida e encontra nela uma história de amor que parecia ter sido esquecida pelo tempo."
+    },
+
+    {
+        id: 2,
+        titulo: "O Reino da Lua",
+        autor: "Lucas Almeida",
+        genero: "Fantasia",
+        preco: 44.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 189,
+        emoji: "🌙",
+        capa: "capa2",
+        etiqueta: "NOVO",
+        descricao: "Em um reino iluminado apenas pela lua, um jovem precisa descobrir seus poderes antes que uma antiga ameaça desperte."
+    },
+
+    {
+        id: 3,
+        titulo: "A Última Chave",
+        autor: "Clara Martins",
+        genero: "Mistério",
+        preco: 32.90,
+        avaliacao: "⭐⭐⭐⭐☆",
+        avaliacoes: 321,
+        emoji: "🔑",
+        capa: "capa3",
+        etiqueta: "POPULAR",
+        descricao: "Uma chave misteriosa aparece na porta de Clara e dá início a uma investigação cheia de segredos e pistas escondidas."
+    },
+
+    {
+        id: 4,
+        titulo: "Entre Páginas",
+        autor: "Beatriz Souza",
+        genero: "Romance",
+        preco: 34.90,
+        precoAntigo: 49.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 412,
+        emoji: "🌹",
+        capa: "capa4",
+        etiqueta: "-30%",
+        descricao: "Duas pessoas se conhecem por acaso em uma livraria e descobrem que suas vidas podem estar ligadas por uma antiga história."
+    },
+
+    {
+        id: 5,
+        titulo: "O Jardim das Sombras",
+        autor: "Helena Costa",
+        genero: "Terror",
+        preco: 42.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 508,
+        emoji: "🌑",
+        capa: "roxo",
+        etiqueta: "POPULAR",
+        descricao: "Um jardim abandonado guarda acontecimentos inexplicáveis que começam a ser revelados depois que uma família se muda para a casa."
+    },
+
+    {
+        id: 6,
+        titulo: "Depois do Inverno",
+        autor: "Gabriel Lima",
+        genero: "Romance",
+        preco: 36.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 376,
+        emoji: "❄️",
+        capa: "vinho",
+        etiqueta: "DESTAQUE",
+        descricao: "Depois de anos separados, dois antigos amigos se reencontram em uma pequena cidade durante o inverno."
+    },
+
+    {
+        id: 7,
+        titulo: "Estrelas Perdidas",
+        autor: "Laura Mendes",
+        genero: "Ficção",
+        preco: 29.90,
+        avaliacao: "⭐⭐⭐⭐☆",
+        avaliacoes: 290,
+        emoji: "✨",
+        capa: "lilas",
+        etiqueta: "NOVO",
+        descricao: "Uma garota encontra um mapa das estrelas e embarca em uma viagem que pode mudar completamente sua visão sobre o universo."
+    },
+
+    {
+        id: 8,
+        titulo: "A Cidade Invisível",
+        autor: "Rafael Duarte",
+        genero: "Fantasia",
+        preco: 41.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 231,
+        emoji: "🏙️",
+        capa: "capa2",
+        etiqueta: "NOVO",
+        descricao: "Existe uma cidade que ninguém consegue encontrar. Um jovem recebe um convite e precisa descobrir como chegar até ela."
+    },
+
+    {
+        id: 9,
+        titulo: "Cartas para Ontem",
+        autor: "Sofia Ferreira",
+        genero: "Romance",
+        preco: 33.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 187,
+        emoji: "💌",
+        capa: "capa1",
+        etiqueta: "",
+        descricao: "Cartas antigas começam a chegar misteriosamente e fazem Sofia descobrir um amor que aconteceu décadas antes de seu nascimento."
+    },
+
+    {
+        id: 10,
+        titulo: "O Último Dragão",
+        autor: "Pedro Henrique",
+        genero: "Fantasia",
+        preco: 46.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 614,
+        emoji: "🐉",
+        capa: "capa3",
+        etiqueta: "POPULAR",
+        descricao: "Quando o último dragão desperta, um garoto comum descobre que possui uma ligação inesperada com a criatura."
+    },
+
+    {
+        id: 11,
+        titulo: "A Casa do Lago",
+        autor: "Isabela Rocha",
+        genero: "Mistério",
+        preco: 38.90,
+        avaliacao: "⭐⭐⭐⭐☆",
+        avaliacoes: 204,
+        emoji: "🏚️",
+        capa: "vinho",
+        etiqueta: "",
+        descricao: "Uma casa isolada à beira de um lago parece guardar a resposta para o desaparecimento de uma família."
+    },
+
+    {
+        id: 12,
+        titulo: "Noite Sem Fim",
+        autor: "André Ribeiro",
+        genero: "Terror",
+        preco: 31.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 355,
+        emoji: "🌙",
+        capa: "capa3",
+        etiqueta: "",
+        descricao: "Uma pequena cidade percebe que o amanhecer não chega mais, enquanto estranhos acontecimentos começam pelas ruas."
+    },
+
+    {
+        id: 13,
+        titulo: "O Relógio Parado",
+        autor: "Camila Nunes",
+        genero: "Mistério",
+        preco: 35.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 267,
+        emoji: "⏰",
+        capa: "lilas",
+        etiqueta: "DESTAQUE",
+        descricao: "Um relógio antigo para exatamente à mesma hora todas as noites e parece estar ligado a um crime do passado."
+    },
+
+    {
+        id: 14,
+        titulo: "Mar de Estrelas",
+        autor: "João Martins",
+        genero: "Ficção",
+        preco: 43.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 318,
+        emoji: "🌌",
+        capa: "capa2",
+        etiqueta: "",
+        descricao: "Uma missão espacial encontra algo impossível no meio do universo e precisa decidir se deve voltar para a Terra."
+    },
+
+    {
+        id: 15,
+        titulo: "O Segredo da Floresta",
+        autor: "Mariana Alves",
+        genero: "Fantasia",
+        preco: 37.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 412,
+        emoji: "🌲",
+        capa: "capa3",
+        etiqueta: "",
+        descricao: "Uma floresta aparentemente comum esconde criaturas mágicas que protegem um segredo há centenas de anos."
+    },
+
+    {
+        id: 16,
+        titulo: "Amor em Paris",
+        autor: "Juliana Castro",
+        genero: "Romance",
+        preco: 39.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 289,
+        emoji: "🗼",
+        capa: "capa4",
+        etiqueta: "",
+        descricao: "Durante uma viagem a Paris, uma jovem encontra alguém que transforma completamente seus planos para o futuro."
+    },
+
+    {
+        id: 17,
+        titulo: "O Enigma Azul",
+        autor: "Thiago Santos",
+        genero: "Mistério",
+        preco: 34.90,
+        avaliacao: "⭐⭐⭐⭐☆",
+        avaliacoes: 176,
+        emoji: "🔵",
+        capa: "capa2",
+        etiqueta: "NOVO",
+        descricao: "Um símbolo azul aparece em diferentes locais da cidade e pode estar relacionado a um segredo esquecido."
+    },
+
+    {
+        id: 18,
+        titulo: "Sombras da Montanha",
+        autor: "Felipe Moraes",
+        genero: "Terror",
+        preco: 40.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 398,
+        emoji: "⛰️",
+        capa: "capa3",
+        etiqueta: "",
+        descricao: "Um grupo de amigos decide explorar uma montanha abandonada e descobre que não está sozinho."
+    },
+
+    {
+        id: 19,
+        titulo: "O Inventor de Sonhos",
+        autor: "Nicolas Vieira",
+        genero: "Ficção",
+        preco: 45.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 421,
+        emoji: "💭",
+        capa: "lilas",
+        etiqueta: "DESTAQUE",
+        descricao: "Um inventor cria uma máquina capaz de transformar sonhos em realidade, mas descobre que toda invenção tem um preço."
+    },
+
+    {
+        id: 20,
+        titulo: "A Princesa de Cristal",
+        autor: "Alice Moura",
+        genero: "Fantasia",
+        preco: 42.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 533,
+        emoji: "👑",
+        capa: "capa1",
+        etiqueta: "POPULAR",
+        descricao: "Uma princesa feita de cristal precisa enfrentar seu maior medo para salvar seu reino de uma antiga maldição."
+    },
+
+    {
+        id: 21,
+        titulo: "Memórias de Verão",
+        autor: "Larissa Gomes",
+        genero: "Romance",
+        preco: 30.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 244,
+        emoji: "☀️",
+        capa: "capa4",
+        etiqueta: "",
+        descricao: "Um verão inesquecível aproxima duas pessoas que acreditavam nunca mais encontrar o amor."
+    },
+
+    {
+        id: 22,
+        titulo: "O Farol Abandonado",
+        autor: "Bruno Cardoso",
+        genero: "Terror",
+        preco: 36.90,
+        avaliacao: "⭐⭐⭐⭐☆",
+        avaliacoes: 312,
+        emoji: "🌊",
+        capa: "capa2",
+        etiqueta: "",
+        descricao: "Um farol que está apagado há décadas volta a emitir luz e chama a atenção de um jovem investigador."
+    },
+
+    {
+        id: 23,
+        titulo: "A Biblioteca Secreta",
+        autor: "Fernanda Lopes",
+        genero: "Fantasia",
+        preco: 44.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 487,
+        emoji: "📚",
+        capa: "capa1",
+        etiqueta: "NOVO",
+        descricao: "Uma biblioteca escondida possui livros capazes de abrir portais para mundos diferentes."
+    },
+
+    {
+        id: 24,
+        titulo: "O Código Perdido",
+        autor: "Eduardo Freitas",
+        genero: "Mistério",
+        preco: 39.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 355,
+        emoji: "💻",
+        capa: "capa3",
+        etiqueta: "",
+        descricao: "Um código encontrado em um livro antigo conduz um estudante até uma descoberta surpreendente."
+    },
+
+    {
+        id: 25,
+        titulo: "Viagem a Marte",
+        autor: "Caio Mendes",
+        genero: "Ficção",
+        preco: 47.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 392,
+        emoji: "🚀",
+        capa: "capa2",
+        etiqueta: "NOVO",
+        descricao: "Uma equipe de jovens astronautas embarca na primeira missão humana a Marte."
+    },
+
+    {
+        id: 26,
+        titulo: "O Castelo Esquecido",
+        autor: "Renata Silva",
+        genero: "Fantasia",
+        preco: 41.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 421,
+        emoji: "🏰",
+        capa: "roxo",
+        etiqueta: "",
+        descricao: "Um castelo desaparecido durante séculos reaparece no topo de uma montanha."
+    },
+
+    {
+        id: 27,
+        titulo: "Quando as Flores Florescem",
+        autor: "Bianca Martins",
+        genero: "Romance",
+        preco: 35.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 277,
+        emoji: "🌸",
+        capa: "capa4",
+        etiqueta: "",
+        descricao: "Uma floricultura se torna o ponto de encontro entre duas pessoas que precisam recomeçar."
+    },
+
+    {
+        id: 28,
+        titulo: "O Quarto 13",
+        autor: "Marcelo Dias",
+        genero: "Terror",
+        preco: 33.90,
+        avaliacao: "⭐⭐⭐⭐☆",
+        avaliacoes: 365,
+        emoji: "🚪",
+        capa: "vinho",
+        etiqueta: "POPULAR",
+        descricao: "Em um antigo hotel existe um quarto que não aparece em nenhuma planta do prédio."
+    },
+
+    {
+        id: 29,
+        titulo: "O Mapa das Estrelas",
+        autor: "Luiza Martins",
+        genero: "Ficção",
+        preco: 38.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 201,
+        emoji: "🗺️",
+        capa: "lilas",
+        etiqueta: "",
+        descricao: "Um mapa encontrado dentro de um livro aponta para lugares que não existem nos mapas conhecidos."
+    },
+
+    {
+        id: 30,
+        titulo: "A Chave Dourada",
+        autor: "Daniel Souza",
+        genero: "Mistério",
+        preco: 31.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 319,
+        emoji: "🗝️",
+        capa: "roxo",
+        etiqueta: "",
+        descricao: "Uma chave dourada é a única pista deixada por um avô antes de desaparecer misteriosamente."
+    },
+
+    {
+        id: 31,
+        titulo: "Lendas do Vale",
+        autor: "Patrícia Reis",
+        genero: "Clássicos",
+        preco: 29.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 182,
+        emoji: "📜",
+        capa: "vinho",
+        etiqueta: "",
+        descricao: "Uma coleção de histórias antigas sobre um vale onde as lendas parecem ganhar vida."
+    },
+
+    {
+        id: 32,
+        titulo: "O Retrato Misterioso",
+        autor: "Gustavo Lima",
+        genero: "Mistério",
+        preco: 37.90,
+        avaliacao: "⭐⭐⭐⭐☆",
+        avaliacoes: 241,
+        emoji: "🖼️",
+        capa: "capa3",
+        etiqueta: "",
+        descricao: "Um retrato antigo parece mudar todas as noites e revela detalhes de uma história escondida."
+    },
+
+    {
+        id: 33,
+        titulo: "Contos da Lua Cheia",
+        autor: "Isadora Melo",
+        genero: "Clássicos",
+        preco: 28.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 153,
+        emoji: "🌕",
+        capa: "capa2",
+        etiqueta: "",
+        descricao: "Uma coleção de contos envolvendo personagens que se encontram durante noites de lua cheia."
+    },
+
+    {
+        id: 34,
+        titulo: "O Último Capítulo",
+        autor: "Henrique Costa",
+        genero: "Ficção",
+        preco: 43.90,
+        avaliacao: "⭐⭐⭐⭐⭐",
+        avaliacoes: 438,
+        emoji: "📖",
+        capa: "capa1",
+        etiqueta: "DESTAQUE",
+        descricao: "Um escritor percebe que acontecimentos de sua vida estão sendo escritos antes mesmo de acontecerem."
+    }
+
+];
+
+
+/* =========================================================
+   ESTADO DO SITE
+========================================================= */
+
+let carrinho = JSON.parse(localStorage.getItem("vinhaCarrinho")) || [];
+
+let favoritos = JSON.parse(localStorage.getItem("vinhaFavoritos")) || [];
+
+
+/* =========================================================
+   FORMATAR PREÇO
+========================================================= */
+
+function formatarPreco(valor) {
+    return valor.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+}
+
+
+/* =========================================================
+   MOSTRAR MENSAGEM
+========================================================= */
+
+function mostrarMensagem(texto) {
+
+    const mensagem = document.getElementById("mensagem");
+
+    mensagem.textContent = texto;
+
+    mensagem.classList.add("mostrar");
+
+    setTimeout(() => {
+        mensagem.classList.remove("mostrar");
+    }, 2200);
+}
+
+
+/* =========================================================
+   SALVAR DADOS
+========================================================= */
+
+function salvarDados() {
+
+    localStorage.setItem(
+        "vinhaCarrinho",
+        JSON.stringify(carrinho)
+    );
+
+    localStorage.setItem(
+        "vinhaFavoritos",
+        JSON.stringify(favoritos)
+    );
+}
+
+
+/* =========================================================
+   RENDERIZAR CATÁLOGO
+========================================================= */
+
+function renderizarLivros(lista = livros) {
+
+    const catalogo = document.getElementById("catalogo");
+
+    catalogo.innerHTML = "";
+
+    if (lista.length === 0) {
+
+        catalogo.innerHTML = `
+            <div style="
+                grid-column: 1 / -1;
+                text-align: center;
+                padding: 60px;
+                color: #8c7b88;
+            ">
+                <div style="font-size:50px;">📚</div>
+                <h3 style="
+                    font-family:'DM Serif Display',serif;
+                    font-size:28px;
+                    margin:10px;
+                    color:#59354f;
+                ">
+                    Nenhum livro encontrado
+                </h3>
+                <p>
+                    Tente pesquisar por outro título, autor ou gênero.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    lista.forEach(livro => {
+
+        const estaFavorito = favoritos.includes(livro.id);
+
+        const card = document.createElement("article");
+
+        card.className = "card-livro";
+
+        card.innerHTML = `
+
+            ${
+                livro.etiqueta
+                ?
+                `<div class="etiqueta ${
+                    livro.etiqueta === "NOVO"
+                    ? "novo"
+                    : livro.etiqueta === "-30%"
+                    ? "oferta"
+                    : ""
+                }">
+                    ${livro.etiqueta}
+                </div>`
+                :
+                ""
+            }
+
+            <button
+                class="favorito ${estaFavorito ? "ativo" : ""}"
+                onclick="alternarFavorito(${livro.id})"
+                title="Adicionar aos favoritos"
+            >
+                ${estaFavorito ? "♥" : "♡"}
+            </button>
+
+            <div class="capa ${livro.capa}">
+
+                <span>${livro.emoji}</span>
+
+                <h3>
+                    ${livro.titulo}
+                </h3>
+
+                <small>
+                    ${livro.genero.toUpperCase()}
+                </small>
+
+            </div>
+
+            <div class="informacoes">
+
+                <span class="genero">
+                    ${livro.genero.toUpperCase()}
+                </span>
+
+                <h3>
+                    ${livro.titulo}
+                </h3>
+
+                <p>
+                    ${livro.autor}
+                </p>
+
+                <div class="avaliacao">
+                    ${livro.avaliacao}
+                    <span>(${livro.avaliacoes})</span>
+                </div>
+
+                <p class="descricao-livro">
+                    ${livro.descricao}
+                </p>
+
+                <div class="preco">
+
+                    ${
+                        livro.precoAntigo
+                        ?
+                        `<del>${formatarPreco(livro.precoAntigo)}</del>`
+                        :
+                        ""
+                    }
+
+                    <strong>
+                        ${formatarPreco(livro.preco)}
+                    </strong>
+
+                </div>
+
+                <button
+                    class="comprar"
+                    onclick="adicionarCarrinho(${livro.id})"
+                >
+                    🛒 Adicionar ao carrinho
+                </button>
+
+            </div>
+        `;
+
+        catalogo.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================================
+   FAVORITOS
+========================================================= */
+
+function alternarFavorito(id) {
+
+    if (favoritos.includes(id)) {
+
+        favoritos = favoritos.filter(
+            favoritoId => favoritoId !== id
+        );
+
+        mostrarMensagem("💔 Livro removido dos favoritos.");
+
+    } else {
+
+        favoritos.push(id);
+
+        mostrarMensagem("❤️ Livro adicionado aos favoritos!");
+
+    }
+
+    salvarDados();
+
+    const campo = document.getElementById("campoPesquisa");
+
+    if (campo.value.trim() !== "") {
+
+        pesquisarLivros(campo.value);
+
+    } else {
+
+        renderizarLivros();
+
+    }
+
+}
+
+
+/* =========================================================
+   ADICIONAR AO CARRINHO
+========================================================= */
+
+function adicionarCarrinho(id) {
+
+    const livro = livros.find(
+        item => item.id === id
+    );
+
+    if (!livro) return;
+
+
+    const itemExistente = carrinho.find(
+        item => item.id === id
+    );
+
+
+    if (itemExistente) {
+
+        itemExistente.quantidade++;
+
+    } else {
+
+        carrinho.push({
+            id: livro.id,
+            quantidade: 1
+        });
+
+    }
+
+
+    salvarDados();
+
+    atualizarCarrinho();
+
+    mostrarMensagem(
+        `📚 "${livro.titulo}" foi adicionado ao carrinho!`
+    );
+
+}
+
+
+/* =========================================================
+   ALTERAR QUANTIDADE
+========================================================= */
+
+function alterarQuantidade(id, valor) {
+
+    const item = carrinho.find(
+        item => item.id === id
+    );
+
+    if (!item) return;
+
+    item.quantidade += valor;
+
+
+    if (item.quantidade <= 0) {
+
+        carrinho = carrinho.filter(
+            itemCarrinho => itemCarrinho.id !== id
+        );
+
+    }
+
+
+    salvarDados();
+
+    atualizarCarrinho();
+
+}
+
+
+/* =========================================================
+   REMOVER LIVRO
+========================================================= */
+
+function removerCarrinho(id) {
+
+    carrinho = carrinho.filter(
+        item => item.id !== id
+    );
+
+    salvarDados();
+
+    atualizarCarrinho();
+
+    mostrarMensagem("🗑️ Livro removido do carrinho.");
+
+}
+
+
+/* =========================================================
+   ATUALIZAR CARRINHO
+========================================================= */
+
+function atualizarCarrinho() {
+
+    const box = document.getElementById("carrinhoBox");
+
+    const contador = document.getElementById(
+        "contadorCarrinho"
+    );
+
+
+    let quantidadeTotal = 0;
+
+    let subtotal = 0;
+
+
+    carrinho.forEach(item => {
+
+        const livro = livros.find(
+            livro => livro.id === item.id
+        );
+
+        if (livro) {
+
+            quantidadeTotal += item.quantidade;
+
+            subtotal += livro.preco * item.quantidade;
+
+        }
+
+    });
+
+
+    contador.textContent = quantidadeTotal;
+
+
+    if (carrinho.length === 0) {
+
+        box.innerHTML = `
+            <div class="carrinho-vazio">
+
+                <div style="font-size:50px;">
+                    🛒
+                </div>
+
+                <h3 style="
+                    font-family:'DM Serif Display',serif;
+                    color:#5a3652;
+                    font-size:25px;
+                    margin:10px;
+                ">
+                    Seu carrinho está vazio
+                </h3>
+
+                <p>
+                    Adicione alguns livros para começar sua compra.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    let html = "";
+
+
+    carrinho.forEach(item => {
+
+        const livro = livros.find(
+            livro => livro.id === item.id
+        );
+
+        if (!livro) return;
+
+
+        const totalLivro =
+            livro.preco * item.quantidade;
+
+
+        html += `
+
+            <div class="item-carrinho">
+
+                <div class="mini-capa ${livro.capa}">
+                    ${livro.emoji}
+                </div>
+
+                <div>
+
+                    <h3>
+                        ${livro.titulo}
+                    </h3>
+
+                    <p>
+                        ${livro.autor}
+                    </p>
+
+                    <div class="quantidade">
+
+                        <button
+                            onclick="alterarQuantidade(${livro.id}, -1)"
+                        >
+                            −
+                        </button>
+
+                        <strong>
+                            ${item.quantidade}
+                        </strong>
+
+                        <button
+                            onclick="alterarQuantidade(${livro.id}, 1)"
+                        >
+                            +
+                        </button>
+
+                        <button
+                            class="remover"
+                            onclick="removerCarrinho(${livro.id})"
+                        >
+                            Remover
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <strong>
+                    ${formatarPreco(totalLivro)}
+                </strong>
+
+            </div>
+        `;
+
+    });
+
+
+    /*
+       REGRA DO DESCONTO:
+
+       Ao comprar 7 ou mais livros,
+       o cliente ganha automaticamente
+       R$ 50,00 de desconto.
+    */
+
+    let desconto = 0;
+
+    if (quantidadeTotal >= 7) {
+
+        desconto = 50;
+
+    }
+
+
+    const totalFinal =
+        Math.max(0, subtotal - desconto);
+
+
+    html += `
+
+        <div class="subtotal">
+
+            <span>
+                Subtotal (${quantidadeTotal} livro${
+                    quantidadeTotal !== 1 ? "s" : ""
+                })
+            </span>
+
+            <strong>
+                ${formatarPreco(subtotal)}
+            </strong>
+
+        </div>
+    `;
+
+
+    if (desconto > 0) {
+
+        html += `
+
+            <div class="desconto">
+
+                <span>
+                    🎉 Desconto por 7+ livros
+                </span>
+
+                <strong>
+                    - ${formatarPreco(desconto)}
+                </strong>
+
+            </div>
+
+            <div class="aviso-desconto">
+                🎉 Parabéns! Você ganhou R$ 50,00 de desconto
+                por adicionar 7 ou mais livros!
+            </div>
+
+        `;
+
+    } else {
+
+        const faltam =
+            7 - quantidadeTotal;
+
+        if (faltam > 0) {
+
+            html += `
+
+                <div class="aviso-desconto">
+
+                    📚 Adicione mais ${faltam}
+                    livro${faltam !== 1 ? "s" : ""}
+                    para ganhar R$ 50,00 de desconto!
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+    html += `
+
+        <div class="total">
+
+            <span>
+                Total
+            </span>
+
+            <strong>
+                ${formatarPreco(totalFinal)}
+            </strong>
+
+        </div>
+
+        <button
+            class="finalizar"
+            onclick="finalizarCompra()"
+        >
+            Finalizar compra →
+        </button>
+
+    `;
+
+
+    box.innerHTML = html;
+
+}
+
+
+/* =========================================================
+   PESQUISA
+========================================================= */
+
+function pesquisarLivros(texto) {
+
+    const termo = texto
+        .toLowerCase()
+        .trim();
+
+
+    const resultado =
+        document.getElementById("resultadoPesquisa");
+
+
+    if (termo === "") {
+
+        resultado.classList.remove("ativo");
+
+        renderizarLivros();
+
+        return;
+
+    }
+
+
+    const encontrados = livros.filter(livro => {
+
+        return (
+            livro.titulo.toLowerCase().includes(termo) ||
+            livro.autor.toLowerCase().includes(termo) ||
+            livro.genero.toLowerCase().includes(termo) ||
+            livro.descricao.toLowerCase().includes(termo)
+        );
+
+    });
+
+
+    resultado.classList.add("ativo");
+
+
+    resultado.innerHTML = `
+        🔎 ${encontrados.length}
+        livro${encontrados.length !== 1 ? "s" : ""}
+        encontrado${encontrados.length !== 1 ? "s" : ""}
+        para "<strong>${texto}</strong>"
+    `;
+
+
+    renderizarLivros(encontrados);
+
+}
+
+
+/* =========================================================
+   FINALIZAR COMPRA
+========================================================= */
+
+function finalizarCompra() {
+
+    if (carrinho.length === 0) {
+
+        mostrarMensagem(
+            "🛒 Seu carrinho está vazio."
+        );
+
+        return;
+
+    }
+
+
+    let quantidadeTotal = 0;
+
+    carrinho.forEach(item => {
+        quantidadeTotal += item.quantidade;
+    });
+
+
+    if (quantidadeTotal >= 7) {
+
+        mostrarMensagem(
+            "🎉 Compra finalizada com R$ 50,00 de desconto!"
+        );
+
+    } else {
+
+        mostrarMensagem(
+            "🎉 Compra finalizada com sucesso!"
+        );
+
+    }
+
+
+    carrinho = [];
+
+    salvarDados();
+
+    atualizarCarrinho();
+
+}
+
+
+/* =========================================================
+   NEWSLETTER
+========================================================= */
+
+document
+    .getElementById("newsletterForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        mostrarMensagem(
+            "✉️ Inscrição realizada com sucesso!"
+        );
+
+        this.reset();
+
+    });
+
+
+/* =========================================================
+   CAMPO DE PESQUISA
+========================================================= */
+
+document
+    .getElementById("campoPesquisa")
+    .addEventListener("input", function() {
+
+        pesquisarLivros(this.value);
+
+    });
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+renderizarLivros();
+
+atualizarCarrinho();
+
+</script>
+
+</body>
+
+</html>
